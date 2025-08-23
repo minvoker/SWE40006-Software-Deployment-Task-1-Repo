@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*"
+           Name="SWE40006-DllDemo"
+           Language="1033"
+           Version="1.0.0.0"
+           Manufacturer="Max Harrison"
+           UpgradeCode="430EEFC9-E8B1-49ED-906D-3A3CBE788453">
+
+    <Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Feature Id="MainFeature" Title="SWE40006-DllDemo" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+  </Product>
+
+  <!-- Default install folder -->
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="SWE40006-DllDemo" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <!-- EXE + two DLLs -->
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="cmp_Client" Guid="66AFAB1C-E8E6-4AF8-ADDA-71F6A44B4840">
+        <File Id="fil_Client"
+              Name="SWE40006.Client.exe"
+              Source="$(var.SWE40006.Client.TargetDir)SWE40006.Client.exe"
+              KeyPath="yes" />
+      </Component>
+
+      <Component Id="cmp_Math" Guid="6E22E111-95DE-4F55-A198-4BF4DA49A641">
+        <File Id="fil_Math"
+              Name="SWE40006.MathLib.dll"
+              Source="$(var.SWE40006.MathLib.TargetDir)SWE40006.MathLib.dll"
+              KeyPath="yes" />
+      </Component>
+
+      <Component Id="cmp_Text" Guid="3AD41655-2CBC-4EF2-8926-EFFA671A5B15">
+        <File Id="fil_Text"
+              Name="SWE40006.TextLib.dll"
+              Source="$(var.SWE40006.TextLib.TargetDir)SWE40006.TextLib.dll"
+              KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

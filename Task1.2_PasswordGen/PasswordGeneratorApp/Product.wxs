@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*"
+			 Name="PasswordGen"
+			 Language="1033"
+			 Version="1.0.0.0"
+			 Manufacturer="Max Harrison"
+			 UpgradeCode="1967c185-6ce3-463d-9447-c3951e2a90ba">
+
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate  EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="PasswordGen" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<!-- Install to Program Files\PasswordGen -->
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="PasswordGen" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<!-- Just the EXE -->
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<Component Id="cmp_MainExe" Guid="E023C42E-A96F-4CC5-8C5D-A2595ACE7D88">
+				<File Id="fil_MainExe"
+					  Name="PasswordGen.exe"
+					  Source="$(var.PasswordGen.TargetDir)PasswordGen.exe"
+					  KeyPath="yes" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

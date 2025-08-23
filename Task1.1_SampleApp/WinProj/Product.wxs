@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="WinProjTest" Language="1033" Version="1.0.0.0" Manufacturer="Max Harrison" UpgradeCode="1967c185-6ce3-463d-9447-c3951e2a90ba">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="WinProj" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="WinProj" />
+			</Directory>
+		</Directory>
+	</Fragment>
+	
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<Component Id="cmp_MainExe" Guid="5D9A5E8F-DB47-42C3-8D28-95A4E13F2955">
+				<File Id="fil_MainExe"
+					  Name="WindowsFormsApp1.exe"
+					  Source="$(var.WindowsFormsApp1.TargetDir)WindowsFormsApp1.exe"
+					  KeyPath="yes" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
